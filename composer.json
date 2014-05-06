@@ -1,0 +1,24 @@
+{
+  "name": "katpadi/page-on-footer",
+  "description": "Widget that allows you to put page on footer",
+  "keywords": ["wordpress", "plugin", "katpadi", "widget", "footer"],
+  "homepage": "http://katpadi.ph/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Kat Padilla",
+      "email": "awesome@katpadi.ph",
+      "homepage": "http://katpadi.ph"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.3.2",
+    "composer/installers": "v1.0.6"
+  }
+  "source": {
+  "type": "git",
+  "url": "git@github.com:katpadi/A-Footer-Link2Page-Widget.git",
+  "reference": "master"
+  }
+}

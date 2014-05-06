@@ -10,3 +10,7 @@ Instructions
 2. Drop it to your plugins dir (like it's hot)
 3. Activate!
 4. You'll now be able to see it as a widget available to your registered footers.
+
+Notes
+======
+1. You have to have registered sidebars.
