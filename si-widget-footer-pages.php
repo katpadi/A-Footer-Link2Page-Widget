@@ -32,7 +32,7 @@ class SI_Widget_Footer_Pages extends WP_Widget {
     parent::__construct(
       'footer_pages', // Base ID
       "Page on Footer",
-      array( 'description' => __( 'Add an existing page link to your registered footer.', 'text_domain' ), ) // Args
+      array( 'description' => 'Add an existing page link to your registered footer.' ) // Args
     );
   }
 
@@ -51,7 +51,7 @@ class SI_Widget_Footer_Pages extends WP_Widget {
         $title = $instance['title'];
 
         if ($footer_pages->have_posts()) : while ($footer_pages->have_posts()) : $footer_pages->the_post();?>
-        <li><a href="<?php the_permalink(); ?>"><?php echo ( is_null( $title )  ? get_the_title() : $title ); ?></a></li>
+        <li><a href="<?php the_permalink(); ?>"><?php echo ( $title==''  ? get_the_title() : $title ); ?></a></li>
         <?php endwhile; endif;
   }
 
@@ -81,23 +81,28 @@ class SI_Widget_Footer_Pages extends WP_Widget {
           'posts_per_page' => '-1'
         );
         $pagez = new WP_Query( $pagez_args );
+
         if ( isset( $instance[ 'title' ] ) ) {
           $title = $instance[ 'title' ];
         }
         else {
-          $title = null;
+          $title = '';
         }
         ?>
         <fieldset>
-        <label for="<?php echo $this->get_field_id( 'possible_footer_page' ); ?>">Select a page to display:</label>
-        <select id="<?php echo $this->get_field_id( 'possible_footer_page' ); ?>" name="<?php echo $this->get_field_name('possible_footer_page');?> ">
-            <?php if ($pagez->have_posts()) : while ($pagez->have_posts()) : $pagez->the_post();?>
-            <option value="<?php the_ID(); ?>" <?php selected( $possible_footer_page, get_the_ID()); ?>><?php the_title();?></option>
-            <?php endwhile; endif; ?>
-        </select>
-        <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:' ); ?></label>
-        <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
-        <small>Leave the title blank if you want to use the Page Title by default.</small>
+          <div>
+            <label for="<?php echo $this->get_field_id( 'possible_footer_page' ); ?>">Select a page to display:</label>
+            <select id="<?php echo $this->get_field_id( 'possible_footer_page' ); ?>" name="<?php echo $this->get_field_name('possible_footer_page');?> ">
+                <?php if ($pagez->have_posts()) : while ($pagez->have_posts()) : $pagez->the_post();?>
+                <option value="<?php the_ID(); ?>" <?php selected( $possible_footer_page, get_the_ID()); ?>><?php the_title();?></option>
+                <?php endwhile; endif; ?>
+            </select>
+          </div>
+          <div>
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
+            <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
+            <small>Leave the title blank if you want to use the Page Title by default.</small>
+          </div>
         </fieldset>
     <?php
   }
