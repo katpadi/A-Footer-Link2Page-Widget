@@ -43,6 +43,7 @@ class SI_Widget_Footer_Pages extends WP_Widget {
    */
   public function widget( $args, $instance ) {
     extract( $args );
+
     $possible_footer_page = apply_filters( 'possible_footer_page', $instance['possible_footer_page'] );
         $args = array(
             'p'         => $possible_footer_page,
@@ -99,14 +100,13 @@ class SI_Widget_Footer_Pages extends WP_Widget {
             </select>
           </div>
           <div>
-            <label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
+            <label for="<?php echo $this->get_field_id( 'title' ); ?>">Title to Appear:</label>
             <input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>" />
             <small>Leave the title blank if you want to use the Page Title by default.</small>
           </div>
         </fieldset>
     <?php
   }
-
 }
 
 add_action( 'widgets_init', create_function( '', 'register_widget( "SI_Widget_Footer_Pages" );' ) );
